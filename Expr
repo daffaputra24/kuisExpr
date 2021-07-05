@@ -2,7 +2,7 @@
 using namespace std;
  
 bool op(char oper){
-    if(oper == '*' || oper == '+' || oper == '-' || oper == '/'){
+    if(oper == '*' || oper == '+' || oper == '-' || oper == '/'|| oper == '%' || oper == '%')){
         return true;
     }else{
         return false;
@@ -30,7 +30,7 @@ int main(){
                     cout << " " << char_array[i] << " -1";
                     char_array[i+1] = '*';
                 }else{
-                    cout << " " << char_array[i] << " ";    
+                    cout << " " << char_array[i] << " ";   
                 }    
             }else{
             
