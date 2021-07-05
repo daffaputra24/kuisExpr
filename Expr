@@ -2,7 +2,7 @@
 using namespace std;
  
 bool op(char oper){
-    if(oper == '*' || oper == '+' || oper == '-' || oper == '/'|| oper == '%' || oper == '%'){
+    if(oper == '*' || oper == '+' || oper == '-' || oper == '/'|| oper == '%') {
         return true;
     }else{
         return false;
@@ -10,21 +10,17 @@ bool op(char oper){
 }
  
 int main(){
-
     string s;
-    
     getline(cin,s);
     int n = s.length();
     
     char char_array[n + 1];
- 
     strcpy(char_array, s.c_str());
  
     for (int i = 0; i < n; i++){
         if(char_array[i] == ' '){
             continue;
         }else{
-        
             if(op(char_array[i]) == true){
                 if(char_array[i+1] == '-'){
                     cout << " " << char_array[i] << " -1";
@@ -33,7 +29,6 @@ int main(){
                     cout << " " << char_array[i] << " ";   
                 }    
             }else{
-            
                 if(char_array[i] == '('){
                     cout << char_array[i] << " ";
                 }else if(char_array[i] == ')'){
