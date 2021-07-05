@@ -2,7 +2,7 @@
 using namespace std;
  
 bool op(char oper){
-    if(oper == '*' || oper == '+' || oper == '-' || oper == '/'|| oper == '%' || oper == '%')){
+    if(oper == '*' || oper == '+' || oper == '-' || oper == '/'|| oper == '%' || oper == '%'){
         return true;
     }else{
         return false;
