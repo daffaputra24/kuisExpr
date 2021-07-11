@@ -2,7 +2,6 @@
 #include <cstring>
 #include <vector>
 #define MAX 20
-
 using namespace std;
 
 char stk[MAX];
@@ -80,11 +79,10 @@ string Postfix(vector<string> _infix)
                 postfix.push_back(data);
                 data = "";
             }
-
             Pop();
+            
         }else{
             bool skip = false;
-
             if((unsigned)i != _infix.size() && chr[0] == '-'){
                 char nextChr[strlen(_infix[i + 1].c_str())];
                 strcpy(nextChr, _infix[i + 1].c_str());
@@ -133,9 +131,7 @@ string Postfix(vector<string> _infix)
         data = Pop();
         postfix.push_back(data);
     }
-
     i = 0;
-
     for(auto x : postfix){
         postfixData += x;
         
@@ -145,7 +141,6 @@ string Postfix(vector<string> _infix)
 
         i++;
     }
-
     return postfixData;
 }
 
@@ -190,10 +185,8 @@ vector<string> Separating(string _input){
                 }
             }
         }
-
         i++;
     }
-    
     return sprtd;
 }
 
