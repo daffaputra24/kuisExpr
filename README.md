@@ -83,3 +83,16 @@ void MasukkanData(){
         temp.clear();
     }
 } 
+                              
+void InfixtoPostfix(){ //zahra
+    stack <string> temp2;
+    int i = 0;
+    for(remake = infix.begin(); remake != infix.end() ; remake++, i++){
+        if(isdigit(infix[i].back())){
+            postfix.push_back(infix[i]);
+            continue;
+        }
+        if(infix[i] == "("){
+            
+            temp2.push(infix[i]);
+            continue;
