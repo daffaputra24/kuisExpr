@@ -83,7 +83,6 @@ float Value(vector<string> _postfix){
             num.push_back(atof(sprtd.c_str()));
         }
     }
-
     return num.back();
 }
 
@@ -139,12 +138,10 @@ float Postfix(vector<string> _infix) //putri{
                 while(Priority(stk[top]) == Priority(chr[0])){
                     data = Pop();
                     postfix.push_back(data);
-
                     if(top < 0) {
                         break;
                     }
                 }
-
                 data = "";
                 Push(chr[0]);
             }else if(Priority(chr[0]) > Priority(stk[top]) && !skip){
