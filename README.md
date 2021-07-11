@@ -108,3 +108,16 @@ void InfixtoPostfix(){ //zahra
                temp2.top() == "("){
                temp2.push(infix[i]);
             }
+            else{ //putri
+                while(!temp2.empty() &&
+                     (temp2.top() != "(") &&
+                      grande(infix[i], temp2.top())){
+                    
+                    string toPush = temp2.top();
+                    postfix.push_back(toPush);
+                    temp2.pop();
+                }
+                temp2.push(infix[i] );
+            }
+            continue;
+        }
