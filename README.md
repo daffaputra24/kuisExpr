@@ -92,7 +92,13 @@ void InfixtoPostfix(){ //zahra
             postfix.push_back(infix[i]);
             continue;
         }
-        if(infix[i] == "("){
-            
-            temp2.push(infix[i]);
+        if(infix[i] == ")"){ //putri
+            while(!temp2.empty() &&
+                  (temp2.top() != "(")){
+                
+                string toPush = temp2.top();
+                postfix.push_back(toPush);
+                temp2.pop();
+            }
+            temp2.pop();
             continue;
