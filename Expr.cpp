@@ -1,3 +1,4 @@
+// TUGAS VCLASS NO3
 #include <iostream>
 #include <cstring>
 #include <vector>
@@ -64,3 +65,28 @@ float Value(vector<string> _postfix){
     for(auto sprtd : _postfix){
         char chr[strlen(sprtd.c_str())];
         strcpy(chr, sprtd.c_str());
+        
+        if(strspn(chr, cSym) && sizeof(chr) == 1){ //daffa
+            x = num.back();
+            num.pop_back();
+            y = num.back();
+            num.pop_back();
+
+            if(chr[0] == '+'){
+                num.push_back(y + x);
+            }else if(chr[0] == '-'){
+                num.push_back(y - x);
+            }else if(chr[0] == '*'){
+                num.push_back(y * x);
+            }else if(chr[0] == '/'){
+                num.push_back(y / x);
+            }else if(chr[0] == '%'){
+                num.push_back(fmod(y, x));
+            }
+        }else{
+            num.push_back(atof(sprtd.c_str()));
+        }
+    }
+
+    return num.back();
+}
