@@ -128,3 +128,11 @@ void InfixtoPostfix(){ //zahra
         temp2.pop();
     }
 }
+int main(){ //putri
+    MasukkanData();
+    InfixtoPostfix();
+    cout << "Print : ";
+    for(itu = postfix.begin(); itu != postfix.end() ; itu++){
+        cout << *itu << " ";
+    }
+}
