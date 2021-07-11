@@ -121,3 +121,10 @@ void InfixtoPostfix(){ //zahra
             }
             continue;
         }
+        } //zahra
+    while(!temp2.empty()){
+        string toPush = temp2.top();
+        postfix.push_back(toPush);
+        temp2.pop();
+    }
+}
