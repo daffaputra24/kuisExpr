@@ -108,3 +108,34 @@ float Postfix(vector<string> _infix)
             data += sprtd;
             postfix.push_back(data);
             data = "";
+            }else if(chr[0] == '('){ //zahra
+            Push(chr[0]);
+        }else if(chr[0] == ')'){
+            while(stk[top] != '('){
+                data = Pop();
+                postfix.push_back(data);
+                data = "";
+            }
+
+            Pop();
+        }else{
+            bool skip = false;
+
+            if((unsigned)i != _infix.size() && chr[0] == '-'){
+                char nextChr[strlen(_infix[i + 1].c_str())];
+                strcpy(nextChr, _infix[i + 1].c_str());
+
+                if(i > 0){
+                    char prevChr[strlen(_infix[i - 1].c_str())];
+                    strcpy(prevChr, _infix[i - 1].c_str());
+                    
+                    if(strspn(prevChr, cSym)){
+                        data = sprtd;
+                        skip = true;
+                    }
+                }else if(strspn(nextChr, cNum)){
+                    data = sprtd;
+                    skip = true;
+                }
+            }
+            
