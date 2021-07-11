@@ -21,3 +21,32 @@ int prioritas(string op){
     }
     return 0;
 } 
+bool grande(string op, string s){ 
+    int Nilai1, Nilai2;
+    Nilai1 = prioritas(op); Nilai2 = prioritas(s);
+    
+    return Nilai1 <= Nilai2;
+}
+
+vector <string> infix; vector <string> postfix; string temp; vector <string>::iterator remake; vector <string>::iterator itu;
+
+void MasukkanData(){
+    string k;
+    char h;
+    while(cin.get(h)){
+        if(h == '\n'){
+            break;
+        }
+        if(h != ' '){
+            k.push_back(h);
+        }
+    }
+    int length = k.length(); 
+    for(int i = 0; i < length; i++){
+        if(k[i] == '(' ||
+           k[i] == ')'){
+            if(temp.length() != 0){
+                infix.push_back(temp);
+                temp.clear();
+            }
+            infix.push_back(k.substr(i, 1)); 
