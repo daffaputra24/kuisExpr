@@ -66,7 +66,7 @@ float Value(vector<string> _postfix){
         char chr[strlen(sprtd.c_str())];
         strcpy(chr, sprtd.c_str());
         
-        if(strspn(chr, cSym) && sizeof(chr) == 1){ //daffa
+        if(strspn(chr, cSym) && sizeof(chr) == 1){ 
             x = num.back();
             num.pop_back();
             y = num.back();
@@ -90,3 +90,21 @@ float Value(vector<string> _postfix){
 
     return num.back();
 }
+float Postfix(vector<string> _infix) 
+{
+    vector<string> postfix;
+    string data;
+
+    int i = 0;
+
+    char cNum[] = "0123456789";
+    char cSym[] = "()+-/%*";
+
+    for(auto sprtd : _infix){
+        char chr[strlen(sprtd.c_str())];
+        strcpy(chr, sprtd.c_str());
+
+        if(strspn(chr, cNum)){
+            data += sprtd;
+            postfix.push_back(data);
+            data = "";
