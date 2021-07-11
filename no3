@@ -39,18 +39,15 @@ char Pop()
     return 0;
 }
 
-int Priority (char op) //zahra
-{
+int Priority (char op) //zahra {
     if( op == '+' || op =='-')
     {
         return 1;
     }
- 
     if( op == '*' || op =='/' || op == '%')
     {
         return 2;
     }
-
     return 0;
 }
 
@@ -90,16 +87,10 @@ float Value(vector<string> _postfix){
     return num.back();
 }
 
-float Postfix(vector<string> _infix) //putri
-{
+float Postfix(vector<string> _infix) //putri{
     vector<string> postfix;
     string data;
-
     int i = 0;
-
-    char cNum[] = "0123456789";
-    char cSym[] = "()+-/%*";
-
     for(auto sprtd : _infix){
         char chr[strlen(sprtd.c_str())];
         strcpy(chr, sprtd.c_str());
@@ -116,8 +107,8 @@ float Postfix(vector<string> _infix) //putri
                 postfix.push_back(data);
                 data = "";
             }
-
             Pop();
+            
         }else{
             bool skip = false;
 
@@ -214,10 +205,8 @@ vector<string> Separating(string _input){
                 }
             }
         }
-
         i++;
     }
-    
     return sprtd;
 }
 
