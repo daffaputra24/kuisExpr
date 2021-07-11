@@ -50,3 +50,36 @@ void MasukkanData(){
                 temp.clear();
             }
             infix.push_back(k.substr(i, 1)); 
+            if(isdigit(k[i]) || //putri
+           (k[i] == '-' &&
+            i == 0 &&
+            isdigit(k[i+1]))){
+            
+            temp.push_back(k[i]);
+            continue;
+        }
+        if(operate(k[i])){ 
+            if(temp.length() != 0){
+                
+                infix.push_back(temp);
+                temp.clear();
+            }
+            if((k[i] == '-' &&
+                operate(k[i-1])) ||
+               (k[i] == '-' &&
+                i == 0 && k[i+1] == '(') ||
+               (k[i] == '-' &&
+                k[i-1] == '(')){
+                
+                infix.push_back("-1");
+                infix.push_back("*");
+            }else{
+                infix.push_back(k.substr(i, 1));
+            }
+        }
+    } 
+    if(temp.length() != 0){
+        infix.push_back(temp);
+        temp.clear();
+    }
+} 
