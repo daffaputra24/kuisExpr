@@ -102,3 +102,9 @@ void InfixtoPostfix(){ //zahra
             }
             temp2.pop();
             continue;
+        } //zahra
+        if(operate(infix[i][0])){
+            if(temp2.empty() ||
+               temp2.top() == "("){
+               temp2.push(infix[i]);
+            }
