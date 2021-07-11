@@ -38,3 +38,29 @@ char Pop()
 
     return 0;
 }
+
+int Priority (char op) 
+{
+    if( op == '+' || op =='-')
+    {
+        return 1;
+    }
+ 
+    if( op == '*' || op =='/' || op == '%')
+    {
+        return 2;
+    }
+
+    return 0;
+}
+
+float Value(vector<string> _postfix){
+    float x, y;
+    vector<float> num;
+
+    char cNum[] = "0123456789";
+    char cSym[] = "+-/%*";
+
+    for(auto sprtd : _postfix){
+        char chr[strlen(sprtd.c_str())];
+        strcpy(chr, sprtd.c_str());
