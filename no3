@@ -1,26 +1,27 @@
-#include <iostream> //putri
+#include <iostream>
 #include <cstring>
 #include <vector>
 #include <math.h>
 #define MAX 20
+
 using namespace std;
 
-char stack[MAX];
+char stk[MAX];
 int top = -1;
 
-bool isFull(){
+bool IsFull(){
     return top == MAX - 1;
 }
 
-bool isEmpty(){
+bool IsEmpty(){
     return top == -1;
 }
 
-void Push(char p)
+void Push(char _ch)
 {
-    if(!isFull())
+    if(!IsFull())
     {
-        stack[++top] = p;
+        stk[++top] = _ch;
     }
 }
 
@@ -28,10 +29,10 @@ char Pop()
 {
     char ch;
 
-    if(!isEmpty())
+    if(!IsEmpty())
     {
-        ch = stack[top];
-        stack[top] = '0';
+        ch = stk[top];
+        stk[top] = '\0';
         top--;
         return(ch);
     }
@@ -39,57 +40,67 @@ char Pop()
     return 0;
 }
 
-int Priority (char op) //zahra {
-    if( op == '+' || op =='-')
+int Priority (char _alpha)
+{
+    if(_alpha == '+' || _alpha =='-')
     {
-        return 1;
+        return(1);
     }
-    if( op == '*' || op =='/' || op == '%')
+ 
+    if(_alpha == '*' || _alpha =='/' || _alpha == '%')
     {
-        return 2;
+        return(2);
     }
+
     return 0;
 }
 
 float Value(vector<string> _postfix){
-    float x, y;
+    float a, b;
     vector<float> num;
 
-    char cNum[] = "0123456789";
+    
     char cSym[] = "+-/%*";
 
     for(auto sprtd : _postfix){
         char chr[strlen(sprtd.c_str())];
         strcpy(chr, sprtd.c_str());
 
-        if(strspn(chr, cSym) && sizeof(chr) == 1){ //daffa
-            x = num.back();
+        if(strspn(chr, cSym) && sizeof(chr) == 1){
+            a = num.back();
             num.pop_back();
-            y = num.back();
+            b = num.back();
             num.pop_back();
 
             if(chr[0] == '+'){
-                num.push_back(y + x);
+                num.push_back(b + a);
             }else if(chr[0] == '-'){
-                num.push_back(y - x);
+                num.push_back(b - a);
             }else if(chr[0] == '*'){
-                num.push_back(y * x);
+                num.push_back(b * a);
             }else if(chr[0] == '/'){
-                num.push_back(y / x);
+                num.push_back(b / a);
             }else if(chr[0] == '%'){
-                num.push_back(fmod(y, x));
+                num.push_back(fmod(b, a));
             }
         }else{
             num.push_back(atof(sprtd.c_str()));
         }
     }
+
     return num.back();
 }
 
-float Postfix(vector<string> _infix) //putri{
+float Postfix(vector<string> _infix)
+{
     vector<string> postfix;
     string data;
+
     int i = 0;
+
+    char cNum[] = "0123456789";
+    char cSym[] = "()+-/%*";
+
     for(auto sprtd : _infix){
         char chr[strlen(sprtd.c_str())];
         strcpy(chr, sprtd.c_str());
@@ -98,7 +109,7 @@ float Postfix(vector<string> _infix) //putri{
             data += sprtd;
             postfix.push_back(data);
             data = "";
-        }else if(chr[0] == '('){ //zahra
+        }else if(chr[0] == '('){
             Push(chr[0]);
         }else if(chr[0] == ')'){
             while(stk[top] != '('){
@@ -106,8 +117,8 @@ float Postfix(vector<string> _infix) //putri{
                 postfix.push_back(data);
                 data = "";
             }
+
             Pop();
-            
         }else{
             bool skip = false;
 
@@ -119,7 +130,7 @@ float Postfix(vector<string> _infix) //putri{
                     char prevChr[strlen(_infix[i - 1].c_str())];
                     strcpy(prevChr, _infix[i - 1].c_str());
                     
-                    if(strspn(prevChr, cSym)){
+                    if(strspn(prevChr, cSym) && prevChr[0] != ')'){
                         data = sprtd;
                         skip = true;
                     }
@@ -129,7 +140,7 @@ float Postfix(vector<string> _infix) //putri{
                 }
             }
 
-            if(top == -1 && !skip){ //daffa
+            if(top == -1 && !skip){
                 Push(chr[0]);
             }else if(Priority(chr[0]) <= Priority(stk[top]) && !skip){
                 data = Pop();
@@ -138,10 +149,12 @@ float Postfix(vector<string> _infix) //putri{
                 while(Priority(stk[top]) == Priority(chr[0])){
                     data = Pop();
                     postfix.push_back(data);
+
                     if(top < 0) {
                         break;
                     }
                 }
+
                 data = "";
                 Push(chr[0]);
             }else if(Priority(chr[0]) > Priority(stk[top]) && !skip){
@@ -152,12 +165,12 @@ float Postfix(vector<string> _infix) //putri{
         i++;
     }
 
-    while(top != -1) //putri
+    while(top != -1)
     {
         data = Pop();
         postfix.push_back(data);
     }
-
+    
     return Value(postfix);
 }
 
@@ -172,7 +185,7 @@ vector<string> Separating(string _input){
     char cSym[] = "(+-/%*";
     char chr[1];
     
-    while(_input[i] != '\0'){ //zahra
+    while(_input[i] != '\0'){
         chr[0] = _input[i];
 
         if(strspn(chr, cNum) && chr[0] != ' '){
@@ -193,22 +206,29 @@ vector<string> Separating(string _input){
 
             data = "";
 
-            if(i > 0){ //daffa
+            if(i > 0){
                 chr[0] = _input[i - 1];
 
                 if(_input[i] != '(' && strspn(chr, cSym)){
                     sprtd.push_back("1");
                     sprtd.push_back("*");
                 }
+            }else if(_input[i + 1] == '('){
+                sprtd.push_back("1");
+                sprtd.push_back("*");
             }
         }
+
         i++;
     }
+
     return sprtd;
 }
 
-int main(){ //zahra
+int main(){
     string input;
+
     getline(cin, input); 
+    
     cout << Postfix(Separating(input)) << endl;
 }
